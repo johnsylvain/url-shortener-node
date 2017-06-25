@@ -1,7 +1,14 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 
-const App = () =>
-  <h1>url-shortener-node</h1>
+import { store } from './store';
+import AppContainer from './containers/AppContainer';
 
-render(<App />, document.getElementById('app'));
+
+render(
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>,
+  document.getElementById('app')
+);

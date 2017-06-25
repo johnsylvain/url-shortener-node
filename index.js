@@ -8,7 +8,7 @@ import apiRoutes from './server/routes/api';
 
 const app = express();
 
-app.use(express.static(__dirname + '/client/dist'))
+app.use(express.static(__dirname + '/client/dist/'))
 app.use(compression());
 app.use(bodyParser());
 
