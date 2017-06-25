@@ -9,7 +9,7 @@ export function getMessage() {
       .then(res => {
         dispatch({
           type: GET_MESSAGE,
-          payload: res
+          payload: res.data
         })
       })
   }

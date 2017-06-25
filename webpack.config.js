@@ -3,8 +3,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server',
+    'webpack-hot-middleware/client',
     './client/src/index.jsx'
   ],
   output: {
@@ -28,10 +27,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  devServer: {
-    contentBase: './client/dist',
-    hot: true
-  },
   plugins: (() => {
     let prodArr = []
     if (process.argv.indexOf('-p') !== -1) {
@@ -49,10 +44,12 @@ module.exports = {
       ];
     }
     return ([
+      new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin({
         template: './client/src/index.html'
-      })
+      }),
+      new webpack.NoEmitOnErrorsPlugin()
     ]).concat(prodArr)
 
   })()
