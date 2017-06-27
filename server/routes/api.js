@@ -1,18 +1,18 @@
 import jwt from 'jsonwebtoken';
 
 import User from '../models/user';
-import { isToken } from '../middlewares/auth';
+import { isAuthenticated } from '../middlewares/auth';
+import { jwtSecret } from '../config';
 
 export default function apiRoutes(app) {
-  // app.use(isToken);
 
-  app.get('/api/test', isToken, (req, res) => {
+  app.get('/api/test', isAuthenticated, (req, res) => {
     res.json({
       message: 'from api'
     })
   });
 
-  app.get('/api/users', isToken, (req, res) => {
+  app.get('/api/users', isAuthenticated, (req, res) => {
     User.find({}, (err, users) => {
       res.json(users)
     })
@@ -25,10 +25,10 @@ export default function apiRoutes(app) {
       if (!user) {
         res.json({ success:false, message: 'Authenication failed. User not found' })
       } else if (user) {
-        if (user.password !== req.body.password) {
-          res.json({success:false, message: 'Authenication failed. Incorrect Password'})
+        if (!user.validPassword(req.body.password)) {
+          res.json({ success:false, message: 'Authenication failed. Incorrect Password' })
         } else {
-          const token = jwt.sign(user, app.get('superSecret'), {
+          const token = jwt.sign(user, jwtSecret, {
             expiresIn: 60
           })
 
