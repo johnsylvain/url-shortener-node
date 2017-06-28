@@ -19,7 +19,7 @@ export default function apiRoutes(app) {
   })
 
   app.post('/api/auth', (req, res) => {
-    User.findOne({ name: req.body.name }, (err, user) => {
+    User.findOne({ username: req.body.name }, (err, user) => {
       if (err) throw err;
 
       if (!user) {

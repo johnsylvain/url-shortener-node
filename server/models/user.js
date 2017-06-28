@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
 
 const userSchema = new Schema({
-  name: String,
+  username: String,
   password: String,
   admin: Boolean
 });
