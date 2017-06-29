@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { store } from './store';
+import AuthenticatedRoute from './components/AuthenticatedRoute'
 import AppContainer from './containers/AppContainer';
 import About from './components/About'
 
@@ -13,7 +14,7 @@ render(
     <Router>
       <Switch>
         <Route exact path="/" component={AppContainer}/>
-        <Route exact path="/about" component={About}/>
+        <AuthenticatedRoute path="/about" component={About}/>
       </Switch>
     </Router>
   </Provider>,

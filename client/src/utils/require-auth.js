@@ -1,4 +1,4 @@
-export default function requireAuth(nextState, replace) {
+export function requireAuth(nextState, replace) {
   var token = localStorage.getItem('token');
   if (token === null) {
     replace({
@@ -6,4 +6,8 @@ export default function requireAuth(nextState, replace) {
       state: { nextPathname: nextState.location.pathname }
     })
   }
+}
+
+export function isAuthenticated() {
+  return localStorage.getItem('token') ? true : false;
 }

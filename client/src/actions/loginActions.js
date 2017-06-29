@@ -5,7 +5,7 @@ import {
   LOGGED_FAILURE
 } from './actionTypes';
 
-export function login(username, password) {
+export function login({ username, password }) {
   return (dispatch) => {
     axios.post('/api/auth', {
       username,
