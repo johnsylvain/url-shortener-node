@@ -63,7 +63,7 @@ html, body {
     margin-bottom: 0.5em;
     color: #555;
   }
-  form input {
+  form * {
     width: 100%;
     border: none;
     outline: none;
@@ -74,12 +74,6 @@ html, body {
     font-size: 1em
   }
   form button {
-    width: 100%;
-    border: none;
-    font-size: 1em;
-    outline: none;
-    padding: 0.8em 1em;
-    font-family: 'Roboto';
     background-color: #A2DED0;
     color: white;
     font-weight: bold;

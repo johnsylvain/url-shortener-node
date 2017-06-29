@@ -3,11 +3,12 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import path from 'path';
+import webpack from 'webpack';
 
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 
-import { port, dbUri, jwtSecret } from './server/config';
+import { port, dbUri, jwtSecret, isDevelopment } from './server/config';
 import User from './server/models/user';
 import appRoutes from './server/routes/app';
 import apiRoutes from './server/routes/api';
@@ -21,10 +22,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 
-(function(app) {
-  var webpack = require('webpack');
-  var webpackConfig = require(process.env.WEBPACK_CONFIG ? process.env.WEBPACK_CONFIG : './webpack.config');
-  var compiler = webpack(webpackConfig);
+if (isDevelopment) {
+  const webpackConfig = require(process.env.WEBPACK_CONFIG ? process.env.WEBPACK_CONFIG : './webpack.config');
+  const compiler = webpack(webpackConfig);
 
   app.use(require("webpack-dev-middleware")(compiler, {
     publicPath: webpackConfig.output.publicPath
@@ -43,7 +43,11 @@ app.use(morgan('dev'));
       res.end();
     });
   });
-})(app);
+
+} else {
+  app.use(express.static(path.join(__dirname, '/client/dist')));
+  app.get("*", (req, res) => res.sendFile('index.html'));
+}
 
 appRoutes(app);
 apiRoutes(app);

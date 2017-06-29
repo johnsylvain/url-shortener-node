@@ -2,8 +2,8 @@ import axios from 'axios';
 import { push } from 'react-router-redux';
 
 import {
-  LOGGED_SUCCESSFULLY,
-  LOGGED_FAILURE
+  LOGGED_IN_SUCCESSFULLY,
+  LOGGED_IN_FAILURE
 } from './actionTypes';
 
 export function login({ username, password }) {
@@ -32,11 +32,22 @@ export function login({ username, password }) {
 }
 
 const loginSuccess = (payload) => ({
-  type: LOGGED_SUCCESSFULLY,
+  type: LOGGED_IN_SUCCESSFULLY,
   payload
 })
 
 const loginFailure = (payload) => ({
-  type: LOGGED_FAILURE,
+  type: LOGGED_IN_FAILURE,
   payload
 })
+
+
+export function autoLogin() {
+  return (dispatch) => {
+    axios.get('/api/testAuth', {
+      headers: { 'x-access-token': localStorage.getItem('token')}
+    }).then(response => {
+      if (response.data.success) dispatch(push('/dashboard'))
+    })
+  }
+}
