@@ -14,8 +14,7 @@ export default function loginReducer(state=intialState, action) {
     case LOGGED_SUCCESSFULLY:
       return Object.assign({}, state, {
         isLoggedIn: true,
-        token: action.payload.token,
-        userId: action.payload.userId
+        token: action.payload.token
       })
     case LOGGED_FAILURE:
       return Object.assign({}, state, {

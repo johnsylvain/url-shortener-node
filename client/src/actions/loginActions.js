@@ -11,18 +11,19 @@ export function login({ username, password }) {
       username,
       password
     }).then((response) => {
-      const token = response.body.token;
-      const userId = response.body.userId;
+      console.log(response);
+      const token = response.data.token;
 
-      if (token && userId) {
+      if (token) {
         localStorage.setItem('token', token);
-        localStorage.setItem('userId', userId);
 
-        dispatch(loginSuccess({userId: userId, token: token}));
+        dispatch(loginSuccess({ token }));
       } else {
         localStorage.removeItem('token');
       }
     }).catch((error) => {
+      console.error(error);
+
       dispatch(loginFailure({ error }));
     })
   }
