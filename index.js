@@ -14,7 +14,7 @@ import apiRoutes from './server/routes/api';
 
 const app = express();
 mongoose.connect(dbUri);
-app.set('superSecret', jwtSecret)
+app.set('superSecret', jwtSecret);
 
 app.use(compression());
 app.use(bodyParser.json());

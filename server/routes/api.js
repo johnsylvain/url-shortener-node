@@ -6,9 +6,9 @@ import { jwtSecret } from '../config';
 
 export default function apiRoutes(app) {
 
-  app.get('/api/test', isAuthenticated, (req, res) => {
+  app.get('/api/testAuth', isAuthenticated, (req, res) => {
     res.json({
-      message: 'from api'
+      success: true
     })
   });
 

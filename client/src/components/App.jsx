@@ -11,13 +11,20 @@ const App = (props) => {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="username"/>
-        <input type="password" name="password"/>
-        <button type="submit">Login</button>
-      </form>
+    <div className="LoginForm">
+        <h1>Admin Login</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="username"
+          />
+          <input
+            type="password"
+            name="password"
+          />
+          <button
+            type="submit">Login</button>
+        </form>
     </div>
   )
 }

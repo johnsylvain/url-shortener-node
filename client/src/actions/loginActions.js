@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { push } from 'react-router-redux';
 
 import {
   LOGGED_SUCCESSFULLY,
@@ -18,6 +19,7 @@ export function login({ username, password }) {
         localStorage.setItem('token', token);
 
         dispatch(loginSuccess({ token }));
+        dispatch(push('/dashboard'));
       } else {
         localStorage.removeItem('token');
       }
