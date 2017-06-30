@@ -3,7 +3,9 @@ import { push } from 'react-router-redux';
 
 import {
   LOGGED_IN_SUCCESSFULLY,
-  LOGGED_IN_FAILURE
+  LOGGED_IN_FAILURE,
+  LOGGED_OUT_SUCCESSFULLY,
+  LOGGED_OUT_FAILURE,
 } from './actionTypes';
 
 export function login({ username, password }) {
@@ -49,5 +51,15 @@ export function autoLogin() {
     }).then(response => {
       if (response.data.success) dispatch(push('/dashboard'))
     })
+  }
+}
+
+export function logout() {
+  return (dispatch) => {
+    localStorage.removeItem('token');
+    dispatch(push('/'))
+    return {
+      type: LOGGED_OUT_SUCCESSFULLY
+    }
   }
 }

@@ -27,6 +27,7 @@ class App extends Component {
     return (
       <div className="LoginForm">
           <h1>Admin Login</h1>
+          <Link to="/dashboard" >Dashboard</Link>
           <form onSubmit={this.handleSubmit}>
             <input
               type="text"

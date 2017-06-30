@@ -30,7 +30,7 @@ export default function apiRoutes(app) {
           res.json({ success:false, message: 'Authenication failed. Incorrect Password' })
         } else {
           const token = jwt.sign(user, jwtSecret, {
-            expiresIn: 60
+            expiresIn: 60 * 10
           })
 
           res.json({

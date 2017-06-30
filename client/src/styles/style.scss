@@ -50,8 +50,14 @@ table {
 $lightGray: #eeeeee;
 
 html, body {
-  font-family: 'Roboto';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 12pt;
+}
+
+.container {
+	max-width: 40em;
+	margin: 0 auto;
+	padding: 1em;
 }
 
 .LoginForm {
@@ -79,4 +85,11 @@ html, body {
     font-weight: bold;
     cursor: pointer;
   }
+}
+
+.Dashboard {
+	h2 {
+		font-size: 2em;
+		font-weight: bold;
+	}
 }

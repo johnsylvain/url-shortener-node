@@ -1,32 +1,28 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import {
-  ConnectedRouter, push
-} from 'react-router-redux';
-
+import { Switch, Route } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 
 import { store, history } from './store';
 import AuthenticatedRoute from './components/AuthenticatedRoute'
 import AppContainer from './containers/AppContainer';
-import About from './components/About'
+import DashboardContainer from './containers/DashboardContainer'
 
 import './styles/style.scss';
 
 
 render(
-  <MuiThemeProvider>
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <div className="container">
         <Switch>
           <Route exact path="/" component={AppContainer}/>
-          <AuthenticatedRoute path="/dashboard" component={About}/>
+          <AuthenticatedRoute path="/dashboard" component={DashboardContainer}/>
         </Switch>
-      </ConnectedRouter>
-    </Provider>
-  </MuiThemeProvider>,
+      </div>
+    </ConnectedRouter>
+  </Provider>,
   document.getElementById('app')
 );
 
