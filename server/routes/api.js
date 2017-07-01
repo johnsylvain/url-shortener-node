@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 import User from '../models/user';
+import Link from '../models/link';
 import { isAuthenticated } from '../middlewares/auth';
 import { jwtSecret } from '../config';
 
@@ -12,9 +13,27 @@ export default function apiRoutes(app) {
     })
   });
 
-  app.get('/api/users', isAuthenticated, (req, res) => {
-    User.find({}, (err, users) => {
-      res.json(users)
+  app.post('/api/newlink', (req, res) => {
+    const { url, description } = req.body;
+    Link.find({ url }, (err, links) => {
+      if(err) throw err;
+
+      if (links.length) {
+        return res.json({
+          success: false,
+          message: 'URL already exists'
+        })
+      } else {
+        const newLink = new Link({
+          url,
+          description
+        })
+        newLink.save((err, link) => {
+          if (err) return res.send(err);
+          res.json(link);
+        })
+
+      }
     })
   })
 
