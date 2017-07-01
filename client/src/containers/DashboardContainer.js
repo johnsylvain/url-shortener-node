@@ -7,7 +7,6 @@ import * as loginActionCreators from '../actions/loginActions';
 import * as mainActionCreators from '../actions/mainActions';
 
 function mapStateToProps(state) {
-  console.log('STATE', state)
   return {
     main: state.main,
     login: state.login,

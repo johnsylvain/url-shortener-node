@@ -2,6 +2,8 @@
 export const GET_LINKS_REQUEST = 'GET_LINKS_REQUEST';
 export const GET_LINKS_SUCCESS = 'GET_LINKS_SUCCESS';
 export const GET_LINKS_FAILURE = 'GET_LINKS_FAILURE';
+export const ADD_LINK_SUCCESS = 'ADD_LINK_SUCCESS';
+export const ADD_LINK_FAILURE = 'ADD_LINK_FAILURE';
 
 
 // Authentication Actions

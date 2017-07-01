@@ -13,29 +13,6 @@ export default function apiRoutes(app) {
     })
   });
 
-  app.post('/api/newlink', isAuthenticated, (req, res) => {
-    const { url, description } = req.body;
-    Link.find({ url }, (err, links) => {
-      if(err) throw err;
-
-      if (links.length) {
-        return res.json({
-          success: false,
-          message: 'URL already exists'
-        })
-      } else {
-        const newLink = new Link({
-          url,
-          description
-        })
-        newLink.save((err, link) => {
-          if (err) return res.send(err);
-          res.json(link);
-        })
-
-      }
-    })
-  })
 
   app.post('/api/auth', (req, res) => {
     User.findOne({ username: req.body.username }, (err, user) => {
@@ -68,6 +45,29 @@ export default function apiRoutes(app) {
       if (err) throw err;
 
       res.json(links);
+    })
+  })
+  app.post('/api/links', isAuthenticated, (req, res) => {
+    const { url, description } = req.body;
+    Link.find({ url }, (err, links) => {
+      if(err) throw err;
+
+      if (links.length) {
+        return res.json({
+          success: false,
+          message: 'URL already exists'
+        })
+      } else {
+        const newLink = new Link({
+          url,
+          description
+        })
+        newLink.save((err, link) => {
+          if (err) return res.send(err);
+          res.json(link);
+        })
+
+      }
     })
   })
 }

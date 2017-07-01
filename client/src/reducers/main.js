@@ -2,6 +2,8 @@ import {
   GET_LINKS_REQUEST,
   GET_LINKS_SUCCESS,
   GET_LINKS_FAILURE,
+  ADD_LINK_SUCCESS,
+  ADD_LINK_FAILURE,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -24,6 +26,14 @@ export default function mainReducer(state=initialState, action) {
     case GET_LINKS_FAILURE:
       return Object.assign({}, state, {
         isLoading: false,
+        error: action.payload
+      });
+    case ADD_LINK_SUCCESS:
+      return Object.assign({}, state, {
+        links: [...state.links, action.payload]
+      })
+    case ADD_LINK_FAILURE:
+      return Object.assign({}, state, {
         error: action.payload
       })
     default:
