@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../utils/require-auth';
 
 class App extends Component {
@@ -27,7 +26,6 @@ class App extends Component {
     return (
       <div className="LoginForm">
           <h1>Admin Login</h1>
-          <Link to="/dashboard" >Dashboard</Link>
           <form onSubmit={this.handleSubmit}>
             <input
               type="text"

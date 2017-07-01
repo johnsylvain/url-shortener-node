@@ -1,3 +1,8 @@
+// Link Actions
+export const GET_LINKS_REQUEST = 'GET_LINKS_REQUEST';
+export const GET_LINKS_SUCCESS = 'GET_LINKS_SUCCESS';
+export const GET_LINKS_FAILURE = 'GET_LINKS_FAILURE';
+
 
 // Authentication Actions
 export const LOGGED_IN_SUCCESSFULLY = 'LOGGED_IN_SUCCESSFULLY';

@@ -18,7 +18,9 @@ export default function appRoutes(app) {
   app.get('/:code', (req, res) => {
     const { code } = req.params;
     Link.findOne({ code }, (err, link) => {
-      res.redirect(link.url)
+      if (err) throw err;
+      if (link) return res.redirect(link.url);
+      else return res.send(404)
     })
   })
 }
