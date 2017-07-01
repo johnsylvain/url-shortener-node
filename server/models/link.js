@@ -1,6 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import btoa from 'btoa';
 import { dbUri } from '../config';
 
 const connection = mongoose.createConnection(dbUri);
@@ -12,7 +11,7 @@ const linkSchema = new Schema({
   description: String,
   code: String,
   linkId: Number
-})
+});
 
 linkSchema.plugin(autoIncrement.plugin, {
   model: 'Link',

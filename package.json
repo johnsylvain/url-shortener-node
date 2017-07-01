@@ -12,7 +12,7 @@
     ]
   },
   "scripts": {
-    "start": "./node_modules/.bin/nodemon -w index.js --exec \"./node_modules/.bin/babel-node index.js --presets es2015\"",
+    "start": "./node_modules/.bin/nodemon -w index.js,server --exec \"./node_modules/.bin/babel-node index.js --presets es2015\"",
     "dev:wds": "./node_modules/.bin/webpack-dev-server",
     "bundle": "./node_modules/.bin/webpack -p"
   },

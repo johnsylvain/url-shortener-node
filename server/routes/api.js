@@ -13,7 +13,7 @@ export default function apiRoutes(app) {
     })
   });
 
-  app.post('/api/newlink', (req, res) => {
+  app.post('/api/newlink', isAuthenticated, (req, res) => {
     const { url, description } = req.body;
     Link.find({ url }, (err, links) => {
       if(err) throw err;
