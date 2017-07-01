@@ -7,15 +7,19 @@ import * as loginActionCreators from '../actions/loginActions';
 import * as mainActionCreators from '../actions/mainActions';
 
 function mapStateToProps(state) {
+  console.log('STATE', state)
   return {
-    title: state.title
+    main: state.main,
+    login: state.login,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    login: bindActionCreators(loginActionCreators, dispatch),
-    main: bindActionCreators(mainActionCreators, dispatch)
+    actions: {
+      login: bindActionCreators(loginActionCreators, dispatch),
+      main: bindActionCreators(mainActionCreators, dispatch)
+    }
   }
 }
 

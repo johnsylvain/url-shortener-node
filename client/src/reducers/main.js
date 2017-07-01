@@ -4,7 +4,7 @@ import {
   GET_LINKS_FAILURE,
 } from '../actions/actionTypes';
 
-const intialState = {
+const initialState = {
   isLoading: false,
   error: null,
   links: []

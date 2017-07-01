@@ -8,7 +8,9 @@ import {
 export function getLinks() {
   return function(dispatch) {
     dispatch({type: GET_LINKS_REQUEST})
-    return axios.get('/api/links')
+    return axios.get('/api/links', {
+      headers: { 'x-access-token': localStorage.getItem('token') }
+    })
       .then(res => {
         dispatch({
           type: GET_LINKS_SUCCESS,

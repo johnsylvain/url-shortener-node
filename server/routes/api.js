@@ -61,5 +61,13 @@ export default function apiRoutes(app) {
       }
 
     })
+  });
+
+  app.get('/api/links', isAuthenticated, (req, res) => {
+    Link.find({}, (err, links) => {
+      if (err) throw err;
+
+      res.json(links);
+    })
   })
 }

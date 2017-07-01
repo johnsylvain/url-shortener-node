@@ -5,13 +5,13 @@ import {
   LOGGED_OUT_FAILURE
 } from '../actions/actionTypes';
 
-const intialState = {
+const initialState = {
   isLoggedIn: false,
   isLoggingIn: false,
   error: null
 }
 
-export default function loginReducer(state=intialState, action) {
+export default function loginReducer(state=initialState, action) {
   switch (action.type) {
     case LOGGED_IN_SUCCESSFULLY:
       return Object.assign({}, state, {
