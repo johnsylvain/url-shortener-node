@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Link from './link';
+import Link from './Link';
 
 class Dashboard extends Component {
   constructor(props) {

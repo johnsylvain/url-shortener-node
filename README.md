@@ -9,7 +9,7 @@ Create a `.env` file with `MONGO_URI` and `SECRET` fields.
 yarn
 
 # run server
-yarn start
+yarn start:dev
 
 # bundle prod
 yarn bundle
