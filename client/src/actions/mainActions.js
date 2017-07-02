@@ -5,6 +5,8 @@ import {
   GET_LINKS_FAILURE,
   ADD_LINK_SUCCESS,
   ADD_LINK_FAILURE,
+  DELETE_LINK_SUCCESS,
+  DELETE_LINK_FAILURE,
 } from './actionTypes';
 
 export function getLinks() {
@@ -49,3 +51,26 @@ export function addLink({ url, description }) {
       })
   }
 }
+
+export function deleteLink(id) {
+  return function(dispatch) {
+    return axios.delete(`/api/links/${id}`, {
+      headers: { 'x-access-token': localStorage.getItem('token')}
+    }).then(response => {
+      console.log(response)
+      dispatch(deleteLinkSuccess(id))
+    }).catch(err => {
+      dispatch(deleteLinkFailure(err))
+    })
+  }
+}
+
+const deleteLinkSuccess = (id) => ({
+  type: DELETE_LINK_SUCCESS,
+  payload: id
+})
+
+const deleteLinkFailure = (err) => ({
+  type: DELETE_LINK_FAILURE,
+  payload: err
+})

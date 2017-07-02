@@ -26,7 +26,7 @@ export default function apiRoutes(app) {
           res.json({ success:false, message: 'Authenication failed. Incorrect Password' })
         } else {
           const token = jwt.sign(user, jwtSecret, {
-            expiresIn: 60 * 10
+            expiresIn: 60 * 20
           })
 
           res.json({
@@ -60,7 +60,8 @@ export default function apiRoutes(app) {
       } else {
         const newLink = new Link({
           url,
-          description
+          description,
+          clicks: 0
         })
         newLink.save((err, link) => {
           if (err) return res.send(err);
@@ -68,6 +69,15 @@ export default function apiRoutes(app) {
         })
 
       }
+    })
+  });
+
+  app.delete('/api/links/:id', isAuthenticated, (req, res) => {
+    const id = req.params.id;
+
+    Link.findByIdAndRemove(id, (err, link) => {
+      if (err) throw err;
+      res.send(link);
     })
   })
 }

@@ -19,7 +19,10 @@ export default function appRoutes(app) {
     const { code } = req.params;
     Link.findOne({ code }, (err, link) => {
       if (err) throw err;
-      if (link) return res.redirect(link.url);
+      if (link) {
+        Link.findOneAndUpdate({ code }, { $inc: { clicks: 1 }}).exec();
+        return res.redirect(link.url);
+      }
       else return res.send(404)
     })
   })

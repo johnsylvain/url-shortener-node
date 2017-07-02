@@ -24,17 +24,28 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="Dashboard">
-        <h2>Dashboard</h2>
-        <button onClick={this.props.actions.login.logout}>Logout</button>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" name="url" placeholder="url"/>
-          <input type="text" name="description" placeholder="description"/>
-          <button type="submit">Add Link</button>
-        </form>
-        {(this.props.main.links) ?
-          this.props.main.links.map(link =>
-            <Link {...link} />
-          ) : null}
+        <header>
+          <h2>
+            Dashboard
+            <button onClick={this.props.actions.login.logout} id="logout">Logout</button>
+          </h2>
+        </header>
+
+        <section>
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" name="url" placeholder="url" required/>
+            <input type="text" name="description" placeholder="description" required/>
+            <button type="submit">+ Add Link</button>
+          </form>
+        </section>
+
+        <section>
+          <h3>Recent Links ({this.props.main.links.length}):</h3>
+          {(this.props.main.links) ?
+            this.props.main.links.map(link =>
+              <Link {...link} key={link._id} deleteHandler={this.props.actions.main.deleteLink}/>
+            ) : null}
+        </section>
       </div>
     )
   }

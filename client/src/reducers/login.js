@@ -1,6 +1,7 @@
 import {
   LOGGED_IN_SUCCESSFULLY,
   LOGGED_IN_FAILURE,
+  LOGGED_IN_ERROR,
   LOGGED_OUT_SUCCESSFULLY,
   LOGGED_OUT_FAILURE
 } from '../actions/actionTypes';
@@ -8,7 +9,7 @@ import {
 const initialState = {
   isLoggedIn: false,
   isLoggingIn: false,
-  error: null
+  error: {}
 }
 
 export default function loginReducer(state=initialState, action) {
@@ -18,6 +19,8 @@ export default function loginReducer(state=initialState, action) {
         isLoggedIn: true,
         token: action.payload.token
       })
+    case LOGGED_IN_ERROR:
+      // continue to next statement
     case LOGGED_IN_FAILURE:
       return Object.assign({}, state, {
         error: action.payload

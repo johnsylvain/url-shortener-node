@@ -10,7 +10,8 @@ const linkSchema = new Schema({
   url: String,
   description: String,
   code: String,
-  linkId: Number
+  linkId: Number,
+  clicks: Number
 });
 
 linkSchema.plugin(autoIncrement.plugin, {
@@ -22,21 +23,7 @@ linkSchema.plugin(autoIncrement.plugin, {
 
 linkSchema.pre('save', function (next) {
   const link = this;
-
-  // convert to base 64
-  function toRadix(N,radix) {
-    var HexN="", Q=Math.floor(Math.abs(N)), R;
-    while (true) {
-      R=Q%radix;
-      HexN = "0123456789abcdefghijklmnopqrstuvwxyz".charAt(R)
-      + HexN;
-      Q=(Q-R)/radix;
-      if (Q==0) break;
-    }
-    return ((N<0) ? "-"+HexN : HexN);
-  }
-
-  link.code = toRadix(link.linkId, 36);
+  link.code = link.linkId.toString(36);
   next();
 })
 

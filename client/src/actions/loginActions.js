@@ -4,6 +4,7 @@ import { push } from 'react-router-redux';
 import {
   LOGGED_IN_SUCCESSFULLY,
   LOGGED_IN_FAILURE,
+  LOGGED_IN_ERROR,
   LOGGED_OUT_SUCCESSFULLY,
   LOGGED_OUT_FAILURE,
 } from './actionTypes';
@@ -14,7 +15,7 @@ export function login({ username, password }) {
       username,
       password
     }).then((response) => {
-      const token = response.data.token;
+      const { token, message } = response.data;
 
       if (token) {
         localStorage.setItem('token', token);
@@ -23,6 +24,7 @@ export function login({ username, password }) {
         dispatch(push('/dashboard'));
       } else {
         localStorage.removeItem('token');
+        dispatch(loginError({ message }))
       }
     }).catch((error) => {
       dispatch(loginFailure({ error }));
@@ -37,6 +39,11 @@ const loginSuccess = (payload) => ({
 
 const loginFailure = (payload) => ({
   type: LOGGED_IN_FAILURE,
+  payload
+})
+
+const loginError = (payload) => ({
+  type: LOGGED_IN_ERROR,
   payload
 })
 
