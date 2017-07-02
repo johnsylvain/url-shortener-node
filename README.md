@@ -19,3 +19,4 @@ yarn bundle
 - [x] JWT Authentication
 - [x] Store links in db
 - [x] api to generate short links
+- [ ] add server side rendering for dashboard
