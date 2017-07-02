@@ -46,7 +46,7 @@ if (isDevelopment) {
 
 } else {
   app.use(express.static(path.join(__dirname, '/client/dist')));
-  app.get("*", (req, res) => res.sendFile('index.html'));
+  app.get("/", (req, res) => res.sendFile('index.html'));
 }
 
 appRoutes(app);

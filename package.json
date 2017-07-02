@@ -13,6 +13,7 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/nodemon --watch server --watch index.js --exec \"./node_modules/.bin/babel-node index.js --presets es2015\"",
+    "start:prod": "NODE_ENV=production ./node_modules/.bin/babel-node index.js --presets es2015",
     "dev:wds": "./node_modules/.bin/webpack-dev-server",
     "bundle": "./node_modules/.bin/webpack -p"
   },
