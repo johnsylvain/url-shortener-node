@@ -12,7 +12,7 @@
     ]
   },
   "scripts": {
-    "start": "NODE_ENV=production ./node_modules/.bin/babel-node server/src/index.js --presets es2015",
+    "start": "NODE_ENV=production node server/dist/index.js --presets es2015",
     "build": "./node_modules/.bin/babel ./server/src -s -D -d ./server/dist --presets es2015",
     "start:dev": "./node_modules/.bin/nodemon --watch server --exec \"./node_modules/.bin/babel-node server/src/index.js --presets es2015\"",
     "dev:wds": "./node_modules/.bin/webpack-dev-server",

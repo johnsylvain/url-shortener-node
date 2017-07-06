@@ -32,7 +32,7 @@ if (isDevelopment) {
 
   app.use(require("webpack-hot-middleware")(compiler));
   app.get("/", (req, res, next) => {
-    const filename = path.join('/dist', "index.html");
+    const filename = path.join(__dirname, "/../../client/dist/index.html");
 
     compiler.outputFileSystem.readFile(filename, (err, result) => {
       if (err) {
@@ -45,8 +45,8 @@ if (isDevelopment) {
   });
 
 } else {
-  app.use(express.static(path.join(__dirname, '/client/dist')));
-  app.get("/", (req, res) => res.sendFile('index.html'));
+  app.use(express.static(path.join(__dirname, '/../../client/dist')));
+  app.get("/", (req, res) => res.sendFile(path.join(__dirname, '/index.html')));
 }
 
 appRoutes(app);
