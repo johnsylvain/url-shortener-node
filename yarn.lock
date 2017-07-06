@@ -2204,6 +2204,10 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
+git-open@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/git-open/-/git-open-1.3.1.tgz#b1ade6cf40143e7ae40d4498d98577f57ad79870"
+
 glamor@^2.20.24:
   version "2.20.25"
   resolved "https://registry.yarnpkg.com/glamor/-/glamor-2.20.25.tgz#71b84b82b67a9327771ac59de53ee915d148a4a3"

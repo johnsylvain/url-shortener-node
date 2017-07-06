@@ -8,10 +8,10 @@ import webpack from 'webpack';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 
-import { port, dbUri, jwtSecret, isDevelopment } from './server/config';
-import User from './server/models/user';
-import appRoutes from './server/routes/app';
-import apiRoutes from './server/routes/api';
+import { port, dbUri, jwtSecret, isDevelopment } from './config';
+import User from './models/user';
+import appRoutes from './routes/app';
+import apiRoutes from './routes/api';
 
 const app = express();
 mongoose.connect(dbUri);
@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 
 if (isDevelopment) {
-  const webpackConfig = require(process.env.WEBPACK_CONFIG ? process.env.WEBPACK_CONFIG : './webpack.config');
+  const webpackConfig = require(process.env.WEBPACK_CONFIG ? process.env.WEBPACK_CONFIG : '../../webpack.config');
   const compiler = webpack(webpackConfig);
 
   app.use(require("webpack-dev-middleware")(compiler, {
