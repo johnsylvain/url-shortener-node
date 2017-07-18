@@ -6,7 +6,8 @@ import * as actionCreators from '../actions/loginActions';
 
 function mapStateToProps(state) {
   return {
-    error: state.login.error
+    error: state.login.error,
+    isLoggedIn: state.login.isLoggedIn
   }
 }
 
