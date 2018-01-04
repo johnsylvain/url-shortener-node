@@ -6,6 +6,8 @@ import {
   ADD_LINK_FAILURE,
   DELETE_LINK_SUCCESS,
   DELETE_LINK_FAILURE,
+  UPDATE_LINK_SUCCESS,
+  UPDATE_LINK_FAILURE,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -17,36 +19,63 @@ const initialState = {
 export default function mainReducer(state=initialState, action) {
   switch (action.type) {
     case GET_LINKS_REQUEST:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isLoading: true
-      });
+      }
+
     case GET_LINKS_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isLoading: false,
         links: action.payload
-      });
+      }
+
     case GET_LINKS_FAILURE:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isLoading: false,
         error: action.payload
-      });
+      }
+
     case ADD_LINK_SUCCESS:
-      return Object.assign({}, state, {
-        links: [...state.links, action.payload]
-      })
-    case ADD_LINK_FAILURE:
-      return Object.assign({}, state, {
-        error: action.payload
-      })
+      return {
+        ...state,
+        links: [
+          ...state.links,
+          action.payload
+        ]
+      }
+
     case DELETE_LINK_SUCCESS:
-      return Object.assign({}, state, {
-        links: state.links.filter(link => action.payload !== link._id)
-      });
+      return {
+        ...state,
+        links: state.links
+          .filter(l => 
+            action.payload !== l._id
+          )
+      }
+
+    case UPDATE_LINK_FAILURE:
+    case ADD_LINK_FAILURE:
     case DELETE_LINK_FAILURE:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         error: action.payload
-      });
+      }
+
+    case UPDATE_LINK_SUCCESS:
+      return {
+        ...state,
+        links: state.links
+          .map(l =>
+            l._id === action.payload._id
+            ? action.payload
+            : l
+          )
+      }
+
     default:
-      return state;
+      return state
   }
 }

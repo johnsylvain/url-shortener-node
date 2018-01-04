@@ -8,9 +8,7 @@ import { jwtSecret } from '../config';
 export default function apiRoutes(app) {
 
   app.get('/api/testAuth', isAuthenticated, (req, res) => {
-    res.json({
-      success: true
-    })
+    res.json({ success: true })
   });
 
 
@@ -46,6 +44,7 @@ export default function apiRoutes(app) {
       res.json(links);
     })
   })
+
   app.post('/api/links', isAuthenticated, (req, res) => {
     const { url, description } = req.body;
     Link.find({ url }, (err, links) => {
@@ -63,20 +62,35 @@ export default function apiRoutes(app) {
           clicks: 0
         })
         newLink.save((err, link) => {
-          if (err) return res.send(err);
-          res.json(link);
+          if (err) return res.send(err)
+          res.json(link)
         })
 
       }
     })
-  });
+  })
+
+  app.put('/api/links/:id', isAuthenticated, (req, res) => {
+    const { code, description, url } = req.body.link
+    const { id } = req.params
+    const query = { _id: id }, options = { new: true }
+
+    Link.findOneAndUpdate(query, {
+      url,
+      description,
+      code
+    }, options, (err, link) => {
+      if (err) res.json({ success: false, message: 'Error updating link' })
+      else res.json(link)
+    })
+  })
 
   app.delete('/api/links/:id', isAuthenticated, (req, res) => {
-    const id = req.params.id;
+    const { id } = req.params
 
     Link.findByIdAndRemove(id, (err, link) => {
-      if (err) throw err;
-      res.send(link);
+      if (err) throw err
+      res.send(link)
     })
   })
 }

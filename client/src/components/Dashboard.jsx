@@ -43,7 +43,11 @@ class Dashboard extends Component {
           <h3>Recent Links ({this.props.main.links.length}):</h3>
           {(this.props.main.links) ?
             this.props.main.links.map(link =>
-              <Link {...link} key={link._id} deleteHandler={this.props.actions.main.deleteLink}/>
+              <Link 
+                link={link} 
+                key={link._id} 
+                deleteHandler={this.props.actions.main.deleteLink}
+                updateHandler={this.props.actions.main.updateLink}/>
             ) : null}
         </section>
       </div>
