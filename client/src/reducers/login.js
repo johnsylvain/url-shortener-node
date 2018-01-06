@@ -9,27 +9,32 @@ import {
 const initialState = {
   isLoggedIn: false,
   isLoggingIn: false,
-  error: {}
+  error: null
 }
 
 export default function loginReducer(state=initialState, action) {
   switch (action.type) {
     case LOGGED_IN_SUCCESSFULLY:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isLoggedIn: true,
-        token: action.payload.token
-      })
+        token: action.payload
+      }
+    
     case LOGGED_IN_ERROR:
-      // continue to next statement
     case LOGGED_IN_FAILURE:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         error: action.payload
-      })
+      }
+
     case LOGGED_OUT_SUCCESSFULLY:
-      return Object.assign({}, state, {
-        isLoggedIn: false,
+      return {
+        ...state,
+        isLoggedIn:false,
         token: null
-      })
+      }
+
     default:
       return state
   }

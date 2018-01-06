@@ -9,6 +9,10 @@ import {
   LOGGED_OUT_FAILURE,
 } from './actionTypes';
 
+const loginSuccess = (token) => ({ type: LOGGED_IN_SUCCESSFULLY, payload: token })
+const loginFailure = (err) => ({ type: LOGGED_IN_FAILURE, payload: err })
+const loginError = (err) => ({ type: LOGGED_IN_ERROR, payload: err })
+
 export function login({ username, password }) {
   return (dispatch) => {
     axios.post('/api/auth', {
@@ -20,7 +24,7 @@ export function login({ username, password }) {
       if (token) {
         localStorage.setItem('token', token);
 
-        dispatch(loginSuccess({ token }));
+        dispatch(loginSuccess(token));
         dispatch(push('/dashboard'));
       } else {
         localStorage.removeItem('token');
@@ -31,22 +35,6 @@ export function login({ username, password }) {
     })
   }
 }
-
-const loginSuccess = (payload) => ({
-  type: LOGGED_IN_SUCCESSFULLY,
-  payload
-})
-
-const loginFailure = (payload) => ({
-  type: LOGGED_IN_FAILURE,
-  payload
-})
-
-const loginError = (payload) => ({
-  type: LOGGED_IN_ERROR,
-  payload
-})
-
 
 export function autoLogin() {
   return (dispatch) => {
